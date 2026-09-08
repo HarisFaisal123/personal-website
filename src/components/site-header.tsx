@@ -32,6 +32,9 @@ export function SiteHeader() {
               <li key={item.href}>
                 <a
                   href={item.href}
+                  {...(item.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : undefined)}
                   className="rounded-sm px-2.5 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
                   {item.title}

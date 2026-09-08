@@ -8,10 +8,13 @@ export const SITE_INFO = {
   url: "https://harisfaisal.dev",
 };
 
+export const RESUME_URL = "/resume.pdf";
+
 export const MAIN_NAV = [
   { title: "About", href: "#about" },
   { title: "Stack", href: "#tech-stack" },
   { title: "Experience", href: "#experience" },
   { title: "Projects", href: "#featured-projects" },
   { title: "Contact", href: "#contact" },
+  { title: "Resume", href: RESUME_URL, external: true },
 ];

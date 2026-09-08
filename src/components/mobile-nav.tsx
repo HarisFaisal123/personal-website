@@ -9,7 +9,7 @@ export function MobileNav({
   items,
   className,
 }: {
-  items: { title: string; href: string }[];
+  items: { title: string; href: string; external?: boolean }[];
   className?: string;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -41,6 +41,9 @@ export function MobileNav({
             <li key={item.href} className="border-b border-edge last:border-b-0">
               <a
                 href={item.href}
+                {...(item.external
+                  ? { target: "_blank", rel: "noopener noreferrer" }
+                  : undefined)}
                 className={cn(
                   "flex items-center gap-3 px-4 py-3 text-sm font-medium",
                   "transition-colors hover:bg-muted hover:text-accent"
