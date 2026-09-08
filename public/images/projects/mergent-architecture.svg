@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 480" width="880" height="480"
+     role="img" aria-label="Mergent architecture: a task or issue is queued through Redis, an Explorer agent maps the codebase, a Coder agent generates the change, an apply step writes it and runs it in a Docker sandbox, a retry loop re-runs the Coder agent until the test suite passes, and a verified pull request is opened.">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#55708a"/>
+    </marker>
+  </defs>
+  <style>
+    .plate  { fill: #0e1620; }
+    .box    { fill: #17222f; stroke: #34485e; stroke-width: 1; }
+    .accbox { fill: #14282c; stroke: #3f7d80; stroke-width: 1; }
+    .t      { fill: #d3dfea; font: 600 13px ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif; }
+    .s      { fill: #8ea4b8; font: 400 10.5px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .lane   { fill: #5ec8c8; font: 600 10px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 1.6px; }
+    .flow   { stroke: #55708a; stroke-width: 1.4; fill: none; marker-end: url(#arrow); }
+    .rule   { stroke: #24323f; stroke-width: 1; }
+  </style>
+
+  <rect class="plate" width="880" height="480" rx="4"/>
+
+  <!-- ============ Lane 1: input ============ -->
+  <text class="lane" x="30" y="34">INPUT · SYNCHRONOUS</text>
+  <line class="rule" x1="30" y1="44" x2="850" y2="44"/>
+
+  <rect class="box" x="30" y="60" width="240" height="58" rx="3"/>
+  <text class="t" x="46" y="84">Task or issue</text>
+  <text class="s" x="46" y="101">feature request input</text>
+
+  <rect class="box" x="320" y="60" width="240" height="58" rx="3"/>
+  <text class="t" x="336" y="84">API endpoint</text>
+  <text class="s" x="336" y="101">FastAPI · returns 202</text>
+
+  <rect class="accbox" x="610" y="60" width="240" height="58" rx="3"/>
+  <text class="t" x="626" y="84">Redis queue</text>
+  <text class="s" x="626" y="101">Celery broker</text>
+
+  <path class="flow" d="M270 89 H314"/>
+  <path class="flow" d="M560 89 H604"/>
+
+  <!-- ============ Lane 2: agent pipeline ============ -->
+  <text class="lane" x="30" y="148">AGENT PIPELINE · ASYNC WORKER</text>
+  <line class="rule" x1="30" y1="158" x2="850" y2="158"/>
+
+  <path class="flow" d="M730 118 V138 H150 V168"/>
+
+  <rect class="box" x="30" y="174" width="240" height="58" rx="3"/>
+  <text class="t" x="46" y="198">Explorer agent</text>
+  <text class="s" x="46" y="215">maps codebase, gathers context</text>
+
+  <rect class="accbox" x="320" y="174" width="240" height="58" rx="3"/>
+  <text class="t" x="336" y="198">Coder agent</text>
+  <text class="s" x="336" y="215">generates the code change</text>
+
+  <rect class="box" x="610" y="174" width="240" height="58" rx="3"/>
+  <text class="t" x="626" y="198">Apply step</text>
+  <text class="s" x="626" y="215">writes the change to the repo</text>
+
+  <path class="flow" d="M270 203 H314"/>
+  <path class="flow" d="M560 203 H604"/>
+
+  <!-- ============ Lane 3: verification ============ -->
+  <text class="lane" x="30" y="262">VERIFICATION</text>
+  <line class="rule" x1="30" y1="272" x2="195" y2="272"/>
+  <line class="rule" x1="255" y1="272" x2="850" y2="272"/>
+
+  <path class="flow" d="M730 232 V252 H225 V282"/>
+
+  <rect class="box" x="30" y="288" width="390" height="58" rx="3"/>
+  <text class="t" x="46" y="312">Docker sandbox</text>
+  <text class="s" x="46" y="329">runs the test suite against the change</text>
+
+  <rect class="accbox" x="460" y="288" width="390" height="58" rx="3"/>
+  <text class="t" x="476" y="312">Retry loop</text>
+  <text class="s" x="476" y="329">Coder agent retries until tests pass</text>
+
+  <path class="flow" d="M420 317 H454"/>
+
+  <!-- ============ Lane 4: result ============ -->
+  <text class="lane" x="30" y="376">RESULT</text>
+  <line class="rule" x1="30" y1="386" x2="405" y2="386"/>
+  <line class="rule" x1="475" y1="386" x2="850" y2="386"/>
+
+  <path class="flow" d="M655 346 V366 H440 V396"/>
+
+  <rect class="accbox" x="30" y="402" width="820" height="58" rx="3"/>
+  <text class="t" x="46" y="426">Pull request opened</text>
+  <text class="s" x="46" y="443">verified — sandbox tests passing after the retry loop</text>
+</svg>

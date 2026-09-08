@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="slate"], [data-theme="slate"] *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens
+   Warm paper in light, deep slate in dark, with a single teal accent used for
+   links, active nav state and the "current role" marker.
+   --------------------------------------------------------------------------- */
+
+:root,
+[data-theme="paper"] {
+  color-scheme: light;
+
+  --background: oklch(0.99 0.004 95);
+  --foreground: oklch(0.21 0.015 260);
+  --muted: oklch(0.96 0.005 95);
+  --muted-foreground: oklch(0.52 0.014 260);
+  --surface: oklch(0.975 0.005 95);
+  --edge: oklch(0.89 0.007 265);
+  --edge-strong: oklch(0.8 0.01 265);
+  --accent: oklch(0.55 0.11 195);
+  --accent-foreground: oklch(0.99 0.004 95);
+  --accent-soft: oklch(0.94 0.03 195);
+  --ring: oklch(0.55 0.11 195);
+
+  --hatch: oklch(0.89 0.007 265 / 0.9);
+}
+
+[data-theme="slate"] {
+  color-scheme: dark;
+
+  --background: oklch(0.165 0.012 258);
+  --foreground: oklch(0.95 0.005 260);
+  --muted: oklch(0.21 0.014 258);
+  --muted-foreground: oklch(0.68 0.012 260);
+  --surface: oklch(0.19 0.013 258);
+  --edge: oklch(0.29 0.014 258);
+  --edge-strong: oklch(0.38 0.016 258);
+  --accent: oklch(0.76 0.12 192);
+  --accent-foreground: oklch(0.165 0.012 258);
+  --accent-soft: oklch(0.28 0.045 195);
+  --ring: oklch(0.76 0.12 192);
+
+  --hatch: oklch(0.29 0.014 258 / 0.9);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-edge: var(--edge);
+  --color-edge-strong: var(--edge-strong);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --animate-collapsible-down: collapsible-down 240ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-collapsible-up: collapsible-up 240ms cubic-bezier(0.32, 0.72, 0, 1);
+  --animate-fade-in: fade-in 260ms ease-out;
+  --animate-cursor-ripple: cursor-ripple 500ms ease-out forwards;
+}
+
+@keyframes collapsible-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes collapsible-up {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes cursor-ripple {
+  from {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0.6;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Layout utilities
+   The page is a fixed-width column with visible side rails. `screen-line-*`
+   draws a hairline that escapes the column and runs the full viewport width,
+   which is what gives the layout its ruled-paper feel.
+   --------------------------------------------------------------------------- */
+
+@utility screen-line-before {
+  @apply relative before:absolute before:top-0 before:-left-[100vw] before:-z-1 before:h-px before:w-[200vw] before:bg-edge;
+}
+
+@utility screen-line-after {
+  @apply relative after:absolute after:bottom-0 after:-left-[100vw] after:-z-1 after:h-px after:w-[200vw] after:bg-edge;
+}
+
+/* Diagonal hatch used to fill "empty" structural space. */
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    315deg,
+    var(--hatch) 0,
+    var(--hatch) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 10px 10px;
+}
+
+@utility link {
+  @apply text-accent underline decoration-accent/35 underline-offset-[3px] transition-colors hover:decoration-accent;
+}
+
+@layer base {
+  * {
+    border-color: var(--edge);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the sticky header. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--accent-soft);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
