@@ -15,6 +15,7 @@ export const MAIN_NAV = [
   { title: "Stack", href: "#tech-stack" },
   { title: "Experience", href: "#experience" },
   { title: "Projects", href: "#featured-projects" },
+  { title: "Coursework", href: "#coursework" },
   { title: "Contact", href: "#contact" },
   { title: "Resume", href: RESUME_URL, external: true },
 ];

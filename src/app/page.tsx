@@ -5,6 +5,7 @@ import { Reveal } from "@/components/reveal";
 import { SITE_INFO } from "@/config/site";
 import { About } from "@/features/profile/components/about";
 import { ContactCta } from "@/features/profile/components/contact-cta";
+import { Coursework } from "@/features/profile/components/coursework";
 import { Experiences } from "@/features/profile/components/experiences";
 import { GithubContributions } from "@/features/profile/components/github-contributions";
 import { Overview } from "@/features/profile/components/overview";
@@ -71,6 +72,11 @@ export default function Page() {
 
           <Reveal>
             <OtherProjects />
+          </Reveal>
+          <Divider />
+
+          <Reveal>
+            <Coursework />
           </Reveal>
           <Divider />
 

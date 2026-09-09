@@ -12,7 +12,7 @@ export function ContactCta() {
 
   return (
     <Panel id="contact" aria-labelledby="contact-title">
-      <PanelHeader id="contact-title" index="07" title="Get in touch" />
+      <PanelHeader id="contact-title" index="08" title="Get in touch" />
 
       <PanelContent className="space-y-4">
         <p className="max-w-prose text-sm/relaxed text-pretty text-muted-foreground">

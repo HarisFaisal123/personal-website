@@ -87,3 +87,17 @@ export type Project = {
   architectureCaption?: string;
   isExpanded?: boolean;
 };
+
+export type Course = {
+  /** Course code as the registrar lists it, e.g. "CSC373". */
+  code: string;
+  title: string;
+  /** Optional one-line note on what the course covered or what was built in it. */
+  note?: string;
+};
+
+export type CourseworkGroup = {
+  id: string;
+  label: string;
+  courses: Course[];
+};
